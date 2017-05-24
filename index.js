@@ -43,6 +43,15 @@ R.prototype.callSync = function(_opts) {
   return(JSON.parse(child.stdout));
 };
 
+R.prototype.callSyncWithoutParse = function(_opts) {
+  var opts = _opts || {};
+  this.options.env.input = JSON.stringify([this.d, this.path, opts]);
+  var child = child_process.spawnSync("Rscript", this.args, this.options);
+  if (child.stderr) throw child.stderr;
+  return(child.stdout);
+};
+
+
 
 R.prototype.callWithoutParse = function(_opts, _callback) {
   var callback = _callback || _opts;

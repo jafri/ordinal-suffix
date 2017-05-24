@@ -1,5 +1,5 @@
 {
-  "name": "r-script",
+  "name": "r-node-interface",
   "version": "0.0.3",
   "description": "A simple little module for passing data from NodeJS to R (and back again).",
   "keywords": [
