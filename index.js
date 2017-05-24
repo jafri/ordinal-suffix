@@ -43,4 +43,16 @@ R.prototype.callSync = function(_opts) {
   return(JSON.parse(child.stdout));
 };
 
+
+R.prototype.callWithoutParse = function(_opts, _callback) {
+  var callback = _callback || _opts;
+  var opts = _.isFunction(_opts) ? {} : _opts;
+  this.options.env.input = JSON.stringify([this.d, this.path, opts]);
+  var child = child_process.spawn("Rscript", this.args, this.options);
+  child.stderr.on("data", callback);
+  child.stdout.on("data", function(d) {
+    callback(null, d);
+  });
+};
+
 module.exports = init;
